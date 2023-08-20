@@ -132,6 +132,9 @@ inotype(u_int type)
 }
 
 
+#ifdef HAVE_STRUCT_STAT_ST_FLAGS
+#undef HAVE_STRUCT_STAT_ST_FLAGS
+#endif
 #define HAVE_STRUCT_STAT_ST_FLAGS 0
 
 static	void	 apply_specdir(const char *, NODE *, fsnode *, int);
@@ -509,6 +512,9 @@ apply_specdir(const char *dir, NODE *specnode, fsnode *dirnode, int speconly)
 				NODETEST(curnode->flags & F_DEV,
 				    "device number");
 #undef NODETEST
+#ifdef HAVE_STRUCT_STAT_ST_MTIMENSEC
+#undef HAVE_STRUCT_STAT_ST_MTIMENSEC
+#endif
 #define HAVE_STRUCT_STAT_ST_MTIMENSEC 0
 			if (debug & DEBUG_APPLY_SPECFILE)
 				printf("apply_specdir: adding %s\n",

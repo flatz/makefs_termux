@@ -3,7 +3,11 @@
 #ifndef _SYS_CDIO_H_
 #define _SYS_CDIO_H_
 
+#ifdef __APPLE__
+#include <machine/endian.h>
+#else
 #include  <endian.h>
+#endif
 
 // #include <sys/ioccom.h>
 

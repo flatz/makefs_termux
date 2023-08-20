@@ -30,7 +30,12 @@
 #ifndef _FS_UDF_UDF_BSWAP_H_
 #define _FS_UDF_UDF_BSWAP_H_
 
-#include <endian.h>
+#ifdef __APPLE__
+#include <machine/endian.h>
+#else
+#include  <endian.h>
+#endif
+
 // #include <machine/bswap.h>
 // #include <sys/bswap.h>
 

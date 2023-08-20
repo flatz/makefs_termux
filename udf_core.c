@@ -48,6 +48,7 @@
 #include <sys/param.h>
 #include <sys/ioctl.h>
 #include <sys/queue.h>
+#include <sys/time.h>
 #include "newfs_udf.h"
 #include "unicode.h"
 #include "udf_core.h"
@@ -776,7 +777,8 @@ udf_set_regid(struct regid *regid, char const *name)
 {
 	memset(regid, 0, sizeof(*regid));
 	regid->flags    = 0;		/* not dirty and not protected */
-	strcpy((char *) regid->id, name);
+	memset(regid->id, 0, sizeof(regid->id));
+	memcpy(regid->id, name, strlen(name));
 }
 
 
@@ -4514,7 +4516,7 @@ udf_proces_names(void)
 			primary_nr = (uint32_t) random();
 		}
 		context.primary_name = calloc(32, 1);
-		sprintf(context.primary_name, "%08lx", primary_nr);
+		sprintf(context.primary_name, "%08x", primary_nr);
 	}
 	if (context.volset_name == NULL) {
 		if (mmc_discinfo.disc_flags & MMC_DFLAGS_BARCODEVALID) {

@@ -95,6 +95,10 @@ struct timespec	start_time;
 static	fstype_t *get_fstype(const char *);
 static	void	usage(fstype_t *, fsinfo_t *);
 
+long long
+strsuftoll(const char *desc, const char *val,
+    long long min, long long max);
+
 int
 main(int argc, char *argv[])
 {
